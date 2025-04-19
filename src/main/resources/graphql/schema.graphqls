@@ -1,0 +1,45 @@
+type Appointment {
+    id: ID!
+    doctorId: ID!
+    patientId: ID!
+    dateTime: String!
+    description: String
+    status: AppointmentStatus!
+    doctorName: String
+    patientName: String
+}
+
+enum AppointmentStatus {
+    SCHEDULED
+    COMPLETED
+    CANCELLED
+}
+
+type Query {
+    appointmentById(id: ID!): Appointment
+    appointmentsByPatientId(patientId: ID!): [Appointment]
+    appointmentsByDoctorId(doctorId: ID!): [Appointment]
+    upcomingAppointmentsByPatientId(patientId: ID!): [Appointment]
+    allAppointments: [Appointment]
+}
+
+type Mutation {
+    createAppointment(
+        doctorId: ID!,
+        patientId: ID!,
+        dateTime: String!,
+        description: String,
+        status: AppointmentStatus!
+    ): Appointment
+
+    updateAppointment(
+        id: ID!,
+        doctorId: ID,
+        patientId: ID,
+        dateTime: String,
+        description: String,
+        status: AppointmentStatus
+    ): Appointment
+
+    cancelAppointment(id: ID!): Appointment
+}
