@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:5
+    container_name: appointment-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: appointment_db
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - med9-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: med9-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - med9-network
+
+networks:
+  med9-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:

@@ -86,7 +86,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public Optional<AppointmentResponse> getAppointmentById(Long id) {
+    public Optional<AppointmentResponse> getAppointmentById(String id) {
         return appointmentRepository.findById(id)
                 .map(this::enrichAppointmentWithUserDetails);
     }
