@@ -1,4 +1,4 @@
-package com.thiagoalmeida.appointment.infrastructure.messaging.dto;
+package com.thiagoalmeida.appointment.messaging.dto;
 
 import java.time.LocalDateTime;
 
@@ -6,7 +6,7 @@ public record NotificationMessage(
         Long appointmentId,
         Long patientId,
         Long doctorId,
-        LocalDateTime appointmentDateTime,
+        LocalDateTime dateTime,
         String message,
-        String eventType
+        String type
 ) {}

@@ -1,6 +1,6 @@
-package com.thiagoalmeida.appointment.application.dto;
+package com.thiagoalmeida.appointment.dto;
 
-import com.thiagoalmeida.appointment.domain.entity.AppointmentStatus;
+import com.thiagoalmeida.appointment.model.AppointmentStatus;
 
 import java.time.LocalDateTime;
 
