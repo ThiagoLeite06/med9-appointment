@@ -1,6 +1,5 @@
 package com.thiagoalmeida.appointment.service;
 
-import com.thiagoalmeida.appointment.client.UserServiceClient;
 import com.thiagoalmeida.appointment.dto.AppointmentRequest;
 import com.thiagoalmeida.appointment.dto.AppointmentResponse;
 import com.thiagoalmeida.appointment.mapper.AppointmentMapper;
@@ -27,7 +26,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentMapper appointmentMapper;
 
     public AppointmentServiceImpl(AppointmentRepository appointmentRepository,
-                                  UserServiceClient userServiceClient,
                                   AppointmentMapper appointmentMapper
     ) {
         this.appointmentRepository = appointmentRepository;
