@@ -48,7 +48,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public AppointmentResponse getAppointmentById(String id) {
+    public AppointmentResponse getAppointmentById(Long id) {
         Appointment appointment = appointmentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + id));
 
@@ -87,7 +87,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public AppointmentResponse updateAppointment(String id, AppointmentRequest request) {
+    public AppointmentResponse updateAppointment(Long id, AppointmentRequest request) {
         var existingAppointment = appointmentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + id));
 
@@ -107,7 +107,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     @Transactional
-    public AppointmentResponse updateAppointmentStatus(String id, AppointmentStatus status) {
+    public AppointmentResponse updateAppointmentStatus(Long id, AppointmentStatus status) {
         var existingAppointment = appointmentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + id));
 

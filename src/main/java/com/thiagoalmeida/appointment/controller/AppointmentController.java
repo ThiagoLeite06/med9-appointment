@@ -3,7 +3,7 @@ package com.thiagoalmeida.appointment.controller;
 import com.thiagoalmeida.appointment.dto.AppointmentRequest;
 import com.thiagoalmeida.appointment.dto.AppointmentResponse;
 import com.thiagoalmeida.appointment.model.AppointmentStatus;
-import com.thiagoalmeida.appointment.security.AppointmentSecurityService;
+//import com.thiagoalmeida.appointment.security.AppointmentSecurityService;
 import com.thiagoalmeida.appointment.service.AppointmentService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +18,9 @@ import java.util.List;
 public class AppointmentController {
 
     private final AppointmentService appointmentService;
-    private final AppointmentSecurityService appointmentSecurityService;
 
-    public AppointmentController(AppointmentService appointmentService, AppointmentSecurityService appointmentSecurityService) {
+    public AppointmentController(AppointmentService appointmentService) {
         this.appointmentService = appointmentService;
-        this.appointmentSecurityService = appointmentSecurityService;
     }
 
     @PostMapping
@@ -31,8 +29,8 @@ public class AppointmentController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE') or (hasRole('PATIENT') and @appointmentSecurityService.isAppointmentOwner(#id, authentication.principal.username))")
-    public ResponseEntity<AppointmentResponse> getById(@PathVariable String id) {
+//    @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE') or (hasRole('PATIENT')
+    public ResponseEntity<AppointmentResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(appointmentService.getAppointmentById(id));
     }
 
@@ -67,13 +65,13 @@ public class AppointmentController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE')")
-    public ResponseEntity<AppointmentResponse> update(@PathVariable String id, @RequestBody AppointmentRequest request) {
+    public ResponseEntity<AppointmentResponse> update(@PathVariable Long id, @RequestBody AppointmentRequest request) {
         return ResponseEntity.ok(appointmentService.updateAppointment(id, request));
     }
 
     @PatchMapping("/{id}/status")
     @PreAuthorize("hasRole('DOCTOR') or hasRole('NURSE')")
-    public ResponseEntity<AppointmentResponse> updateStatus(@PathVariable String id, @RequestBody AppointmentStatus status) {
+    public ResponseEntity<AppointmentResponse> updateStatus(@PathVariable Long id, @RequestBody AppointmentStatus status) {
         return ResponseEntity.ok(appointmentService.updateAppointmentStatus(id, status));
     }
 }

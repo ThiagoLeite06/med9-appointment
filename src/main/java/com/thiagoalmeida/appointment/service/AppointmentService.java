@@ -10,11 +10,11 @@ import java.util.List;
 
 public interface AppointmentService {
     AppointmentResponse createAppointment(AppointmentRequest request);
-    AppointmentResponse getAppointmentById(String id);
+    AppointmentResponse getAppointmentById(Long id);
     List<AppointmentResponse> getAppointmentsByPatientId(Long patientId);
     List<AppointmentResponse> getAppointmentsByDoctorId(Long doctorId);
     List<AppointmentResponse> getAppointmentsByDateRange(LocalDateTime start, LocalDateTime end);
     Page<AppointmentResponse> getAllAppointments(int page, int size);
-    AppointmentResponse updateAppointment(String id, AppointmentRequest request);
-    AppointmentResponse updateAppointmentStatus(String id, AppointmentStatus status);
+    AppointmentResponse updateAppointment(Long id, AppointmentRequest request);
+    AppointmentResponse updateAppointmentStatus(Long id, AppointmentStatus status);
 }

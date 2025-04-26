@@ -1,20 +1,6 @@
 version: '3.8'
 
 services:
-  mongodb:
-    image: mongo:5
-    container_name: appointment-mongodb
-    ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_DATABASE: appointment_db
-      MONGO_INITDB_ROOT_USERNAME: mongo
-      MONGO_INITDB_ROOT_PASSWORD: mongo
-    volumes:
-      - mongodb_data:/data/db
-    networks:
-      - med9-network
-
   rabbitmq:
     image: rabbitmq:3-management
     container_name: appointment-rabbitmq  # Nome alterado aqui
@@ -27,9 +13,24 @@ services:
     networks:
       - med9-network
 
+  mysql:
+    image: mysql:8.0
+    container_name: appointment-mysql
+    environment:
+      MYSQL_DATABASE: appointment_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: appointment
+      MYSQL_PASSWORD: appointment
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - med9-network
+
 networks:
   med9-network:
     driver: bridge
 
 volumes:
-  mongodb_data:
+  mysql_data:
